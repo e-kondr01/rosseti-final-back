@@ -32,6 +32,7 @@ class Proposal(models.Model):
     title = models.CharField(max_length=256, blank=True)
     description = models.TextField(blank=True)
     status = models.CharField(max_length=128)
+    category = models.CharField(max_length=128, blank=True)
     author = models.ForeignKey(Employee, on_delete=models.CASCADE,
                                related_name='authored_proposals')
     moderator = models.ForeignKey(Employee, on_delete=models.CASCADE,

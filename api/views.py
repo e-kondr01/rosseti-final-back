@@ -1,6 +1,7 @@
 from django.contrib.auth.models import Group
 from rest_framework import generics
-from rest_framework.permissions import AllowAny
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
 
 from .serializers import *
 from .models import *
@@ -18,7 +19,6 @@ class ProposalDraftView(generics.CreateAPIView):
 
 
 class ProposalListView(generics.ListAPIView):
-    permission_classes = [AllowAny]
     serializer_class = ProposalSerializerForList
 
     def get_queryset(self):
@@ -43,3 +43,38 @@ class ProposalView(generics.RetrieveUpdateAPIView):
 
     def perform_update(self, serializer):
         instance = serializer.save(moderator=self.request.user.employee)
+
+
+@api_view(['GET'])
+def latest_successful_proposal(request):
+    title = 'test title'
+    description = 'Test description'
+    resp = {
+        'title': title,
+        'description': description
+    }
+    return JsonResponse(resp)
+
+
+@api_view(['GET'])
+def proposal_collection(request):
+    title1 = 'test title'
+    description1 = 'Test description'
+    category1 = 'test category'
+    title2 = 'test title'
+    description2 = 'Test description'
+    category2 = 'test category'
+
+    resp = [
+        {
+            'title': title1,
+            'category': category1,
+            'description': description1
+            },
+        {
+            'title': title2,
+            'category': category2,
+            'description': description2
+            },
+    ]
+    return JsonResponse(resp)

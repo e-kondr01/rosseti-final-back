@@ -1,0 +1,11 @@
+{% extends "moderator_site/layout.html" %}
+
+{% block body %}
+
+    <h2>Предложение от  {{ object.author }}</h2>
+    <h4>Полученное сообщение:</h4>
+    <div>{{ object.draft }}</div>
+    <div></div>
+
+    
+{% endblock %}

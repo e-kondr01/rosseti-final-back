@@ -37,6 +37,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 INSTALLED_APPS = [
     'api',
     'accounts',
+    'moderator_site',
 
     'rest_framework',
     'rest_framework_simplejwt',

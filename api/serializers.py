@@ -33,7 +33,7 @@ class ProposalSerializerForRetrieveUpdate(serializers.ModelSerializer):
         model = Proposal
         fields = [
             'id', 'draft', 'title', 'description', 'status', 'author',
-            'moderator',
+            'moderator', 'category',
             'created_at', 'updated_at'
             ]
         read_only_fields = ['author', 'moderator', 'created_at', 'updated_at']
