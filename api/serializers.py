@@ -24,11 +24,15 @@ class EmployeeSerializer(serializers.ModelSerializer):
 class ProposalSerializerForRetrieveUpdate(serializers.ModelSerializer):
     author = EmployeeSerializer(read_only=True)
     moderator = EmployeeSerializer(read_only=True)
+    draft = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='description'
+    )
 
     class Meta:
         model = Proposal
         fields = [
-            'id', 'title', 'description', 'status', 'author', 'moderator',
+            'id', 'draft', 'title', 'description', 'status', 'author', 'moderator',
             'created_at', 'updated_at'
             ]
         read_only_fields = ['author', 'moderator', 'created_at', 'updated_at']
