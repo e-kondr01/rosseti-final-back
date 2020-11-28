@@ -19,7 +19,7 @@ class ProposalDraftView(generics.CreateAPIView):
 
 
 class ProposalListView(generics.ListAPIView):
-    serializer_class = ProposalSerializerForList
+    serializer_class = ProposalSerializerForRetrieveUpdate
 
     def get_queryset(self):
         user = self.request.user
