@@ -19,7 +19,7 @@ class ProposalDraftView(generics.CreateAPIView):
 
 
 class ProposalListView(generics.ListAPIView):
-    serializer_class = ProposalSerializerForRetrieveUpdate
+    serializer_class = BadnaidProposalSerializer
 
     def get_queryset(self):
         user = self.request.user
@@ -27,7 +27,7 @@ class ProposalListView(generics.ListAPIView):
         if moderators in user.groups.all():
             return Proposal.objects.all()
         else:
-            return Proposal.objects.filter(author=user.employee).first()
+            return Proposal.objects.filter(author=user.employee)
 
 
 class ProposalView(generics.RetrieveUpdateAPIView):
@@ -47,8 +47,8 @@ class ProposalView(generics.RetrieveUpdateAPIView):
 
 @api_view(['GET'])
 def latest_successful_proposal(request):
-    title = 'Введение электронного помощника в снаряжение монтёров'
-    description = 'Введение новых планшетов модели'
+    title = 'Введение измерителя NEW22 в снаряжение монтёров'
+    description = 'По предложению Александра Александровича, работника Питерского филиала Россетей, в снаряжение электромонтёров был добавлен новый датчик NEW22, который повысил скорость выполнения'
     resp = {
         'title': title,
         'description': description

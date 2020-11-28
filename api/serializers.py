@@ -39,6 +39,24 @@ class ProposalSerializerForRetrieveUpdate(serializers.ModelSerializer):
         read_only_fields = ['author', 'moderator', 'created_at', 'updated_at']
 
 
+class BadnaidProposalSerializer(serializers.ModelSerializer):
+    author = serializers.StringRelatedField()
+    moderator = serializers.StringRelatedField()
+    draft = serializers.SlugRelatedField(
+        read_only=True,
+        slug_field='description'
+    )
+
+    class Meta:
+        model = Proposal
+        fields = [
+            'id', 'draft', 'title', 'description', 'status', 'author',
+            'moderator', 'category',
+            'created_at', 'updated_at'
+            ]
+        read_only_fields = ['author', 'moderator', 'created_at', 'updated_at']
+
+
 class ProposalSerializerForList(serializers.ModelSerializer):
 
     class Meta:
