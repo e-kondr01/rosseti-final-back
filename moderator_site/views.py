@@ -15,3 +15,11 @@ class ProposalDetail(DetailView):
 class UpdateProposal(UpdateView):
     model = Proposal
     template_name = 'moderator_site/proposal_form.html'
+    fields = [
+        'title', 'description', 'status', 'category',
+        ]
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['draft_description'] = self.object.draft.description
+        return context

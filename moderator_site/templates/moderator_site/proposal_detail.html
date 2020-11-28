@@ -3,9 +3,25 @@
 {% block body %}
 
     <h2>Предложение от  {{ object.author }}</h2>
-    <h4>Полученное сообщение:</h4>
-    <div>{{ object.draft }}</div>
-    <div></div>
-
+    <h4>Исходное предложение:</h4>
+    <div>{{ object.draft_description }}</div>
+    <p></p>
+    <h4>Данные для заявления:</h4>
+    <div>Наименование: {{ object.title }}</div>
+    <div>Описание: {{ object.description }}</div>
+    <div>Статус: {{ object.status }}</div>
+    <div>Категория: {{ object.category }}</div>
+    <div>Ответственный сотрудник: {{ object.moderator }}</div>
+    <div>Создано: {{ object.created_at }}</div>
+    <p></p>
+    <a href="{% url 'update_proposal' proposal.pk %}">Изменить</a>
+    <p></p>
+    <h4>Статус рассмотрения предложения (обновлено 28 ноября 2020 г. 13:23):</h4>
+    <div>Оформление соответствует требованиям Положения.</div>
+    <div>Следующий этап: централизованная регистрация в ДИДиИ</div>
+    <button>Отправить заявление</button>
+    <p></p>
+    <h4>Предпочитаемая обратная связь с автором:</h4>
+    <div>Telegram, username: test</div>
     
 {% endblock %}
