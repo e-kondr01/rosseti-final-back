@@ -88,4 +88,4 @@ def proposal_collection(request):
             'description': description2
             },
     ]
-    return JsonResponse(resp)
+    return JsonResponse(resp, safe=False)
