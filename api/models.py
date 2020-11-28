@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models.fields import CharField, DurationField
+from django.db.models.fields import CharField
 from django.db.models.fields.related import OneToOneField
 
 
