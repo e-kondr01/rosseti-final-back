@@ -4,3 +4,4 @@ from .models import *
 
 admin.site.register(ProposalDraft)
 admin.site.register(Proposal)
+admin.site.register(Employee)

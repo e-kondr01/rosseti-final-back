@@ -11,17 +11,27 @@ class ProposalDraftSerializer(serializers.ModelSerializer):
         fields = ['id', 'description', 'author']
 
 
-class ProposalSerializer(serializers.ModelSerializer):
-    author = serializers.PrimaryKeyRelatedField(read_only=True, required=False)
-    moderator = serializers.PrimaryKeyRelatedField(
-        read_only=True, required=False)
+class EmployeeSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Employee
+        fields = [
+            'id', 'name', 'surname',
+            'post', 'experience'
+            ]
+
+
+class ProposalSerializerForRetrieveUpdate(serializers.ModelSerializer):
+    author = EmployeeSerializer(read_only=True)
+    moderator = EmployeeSerializer(read_only=True)
 
     class Meta:
         model = Proposal
         fields = [
             'id', 'title', 'description', 'status', 'author', 'moderator',
-            'created_at'
+            'created_at', 'updated_at'
             ]
+        read_only_fields = ['author', 'moderator', 'created_at', 'updated_at']
 
 
 class ProposalSerializerForList(serializers.ModelSerializer):
@@ -29,5 +39,5 @@ class ProposalSerializerForList(serializers.ModelSerializer):
     class Meta:
         model = Proposal
         fields = [
-            'id', 'title',
+            'id', 'title', 'status',
             ]

@@ -5,15 +5,18 @@ from .serializers import *
 from .models import *
 
 
-class ProposalDraftView(generics.ListCreateAPIView):
+class ProposalDraftView(generics.CreateAPIView):
     serializer_class = ProposalDraftSerializer
     queryset = ProposalDraft.objects.none()
 
     def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
+        draft = serializer.save(author=self.request.user.employee)
+        proposal = Proposal(draft=draft, status='sent to moderator',
+                            author=self.request.user.employee)
+        proposal.save()
 
 
-class ProposalListView(generics.ListCreateAPIView):
+class ProposalListView(generics.ListAPIView):
     serializer_class = ProposalSerializerForList
 
     def get_queryset(self):
@@ -22,13 +25,19 @@ class ProposalListView(generics.ListCreateAPIView):
         if moderators in user.groups.all():
             return Proposal.objects.all()
         else:
-            return Proposal.objects.filter(author=user)
+            return Proposal.objects.filter(author=user.employee)
 
 
 class ProposalView(generics.RetrieveUpdateAPIView):
-    serializer_class = ProposalSerializer
-    queryset = Proposal.objects.all()
+    serializer_class = ProposalSerializerForRetrieveUpdate
 
     def get_queryset(self):
         user = self.request.user
-        return Proposal.objects.filter(author=user)
+        moderators = Group.objects.get(name='moderators')
+        if moderators in user.groups.all():
+            return Proposal.objects.all()
+        else:
+            return Proposal.objects.filter(author=user.employee)
+
+    def perform_update(self, serializer):
+        instance = serializer.save(moderator=self.request.user.employee)
