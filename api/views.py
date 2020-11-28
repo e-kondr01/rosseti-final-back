@@ -48,7 +48,14 @@ class ProposalView(generics.RetrieveUpdateAPIView):
 @api_view(['GET'])
 def latest_successful_proposal(request):
     title = 'Введение измерителя NEW22 в снаряжение монтёров'
-    description = 'По предложению Александра Александровича, работника Питерского филиала Россетей, в снаряжение электромонтёров был добавлен новый датчик NEW22, который повысил скорость выполнения'
+    description = (
+        'По предложению Александра Александровича, работника Питерского'
+        'филиала Россетей, в снаряжение электромонтёров был добавлен новый'
+        'датчик NEW22,'
+        'который уменьшил время выполнения обхода ЛЭП в среднем на'
+        'полчаса в день.'
+        'За своё предложение сотрудник получил 50 тысяч р.'
+        )
     resp = {
         'title': title,
         'description': description
@@ -58,12 +65,16 @@ def latest_successful_proposal(request):
 
 @api_view(['GET'])
 def proposal_collection(request):
-    title1 = 'test title'
-    description1 = 'Test description'
-    category1 = 'test category'
-    title2 = 'test title'
-    description2 = 'Test description'
-    category2 = 'test category'
+    title1 = 'Обход ЛЭП начиная с самой северной вышки'
+    description1 = 'ЛЭП стоит обходить с самого севера, по Фен Шую'
+    category1 = 'порядок выполнения служебного процесса'
+
+    title2 = 'Введение измерителя NEW22 в снаряжение монтёров'
+    description2 = (
+        'Измеритель NEW22 позволяет уменьшить время'
+        'выполнения обхода ЛЭП в среднем на полчаса за день'
+        )
+    category2 = 'снаряжение'
 
     resp = [
         {
