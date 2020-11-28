@@ -27,7 +27,7 @@ class ProposalListView(generics.ListAPIView):
         if moderators in user.groups.all():
             return Proposal.objects.all()
         else:
-            return Proposal.objects.filter(author=user.employee)
+            return Proposal.objects.filter(author=user.employee).first()
 
 
 class ProposalView(generics.RetrieveUpdateAPIView):
@@ -47,8 +47,8 @@ class ProposalView(generics.RetrieveUpdateAPIView):
 
 @api_view(['GET'])
 def latest_successful_proposal(request):
-    title = 'test title'
-    description = 'Test description'
+    title = 'Введение электронного помощника в снаряжение монтёров'
+    description = 'Введение новых планшетов модели'
     resp = {
         'title': title,
         'description': description
