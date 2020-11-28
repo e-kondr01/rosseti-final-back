@@ -1,5 +1,6 @@
 from django.contrib.auth.models import Group
 from rest_framework import generics
+from rest_framework.permissions import AllowAny
 
 from .serializers import *
 from .models import *
@@ -17,6 +18,7 @@ class ProposalDraftView(generics.CreateAPIView):
 
 
 class ProposalListView(generics.ListAPIView):
+    permission_classes = [IsAuthenticated]
     serializer_class = ProposalSerializerForList
 
     def get_queryset(self):
