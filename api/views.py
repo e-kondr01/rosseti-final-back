@@ -18,7 +18,7 @@ class ProposalDraftView(generics.CreateAPIView):
 
 
 class ProposalListView(generics.ListAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     serializer_class = ProposalSerializerForList
 
     def get_queryset(self):

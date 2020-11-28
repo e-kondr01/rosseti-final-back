@@ -29,6 +29,7 @@ SECRET_KEY = config('secret_key')
 DEBUG = config('debug', default=False, cast=bool)
 
 ALLOWED_HOSTS = [config('allowed_hosts')]
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -39,6 +40,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -58,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'rosseti_final_back.urls'
